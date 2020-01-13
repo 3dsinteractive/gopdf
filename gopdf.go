@@ -1158,7 +1158,8 @@ func infodate(t time.Time) string {
 //          		HardLight, SoftLight, Difference, Exclusion, Hue, Saturation, Color, Luminosity
 func (gp *GoPdf) SetAlpha(alpha float64, blendModeStr string) error {
 	if alpha < 0.0 || alpha > 1.0 {
-		return errors.Unwrap(fmt.Errorf("alpha value (0.0 - 1.0) is out of range: %.3f", alpha))
+		//return errors.Unwrap(fmt.Errorf("alpha value (0.0 - 1.0) is out of range: %.3f", alpha))
+		return nil
 	}
 
 	blendMode, err := getBlendMode(blendModeStr)
@@ -1214,7 +1215,8 @@ func getBlendMode (blendModeStr string) (bl string, err error) {
 	case "":
 		bl = "/Normal"
 	default:
-		err = errors.Unwrap(fmt.Errorf("blendMode is unknown"))
+		//err = errors.Unwrap(fmt.Errorf("blendMode is unknown"))
+		err = nil
 	}
 
 	return bl, err
@@ -1231,7 +1233,8 @@ func (gp *GoPdf) addExtGStateObj (extGStateObj *ExtGStateObj) (index int, err er
 
 	procset, ok := pdfObj.(*ProcSetObj)
 	if !ok {
-		err = errors.Unwrap(fmt.Errorf("can't convert pdfobject to procsetobj"))
+		//err = errors.Unwrap(fmt.Errorf("can't convert pdfobject to procsetobj"))
+		err = nil
 		return index, err
 	}
 	procset.ExtGStates = append(procset.ExtGStates, ExtGS{Index: index})
